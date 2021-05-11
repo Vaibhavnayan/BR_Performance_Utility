@@ -1,0 +1,68 @@
+{%extends "main.html" %}
+{%block lrtemplate%}
+<div class="wrapper">
+
+  <form action="/convert" method="post">
+    <!---- <label for="filePath">Enter File Path: </label><br> -->
+    <div class="wrap-input3 form-group">
+     <input class="input2 form-control" type="text" id="filePath" name="filePath" placeholder="Result Master ID" required><br>
+    <!---- <label for="newfilePath">Enter new File Path: </label><br> -->
+   </div>
+   <div class="wrap-input3 validate-input form-group">
+     <input class="input2 form-control" type="text" id="newfilePath" name="newfilePath" placeholder="File Name" required><br>
+     <!---- <label for="newfilePath">Enter new File Path: </label><br> -->
+    </div>
+    <div class="container-contact3-form-btn">
+   <!--<input class="contact3-form-btn" type="submit" value="Download"> -->
+   <button class="contact3-form-btn" id="btn" onclick="start(this)" disabled><span class="btn_text">Download</span> <span class="progress_bar"></span></button>  
+   </div>
+   
+   </form>
+
+  <div class="" id="message"> 
+    {%block success%}
+        
+    {%endblock%}
+    
+    {%block error%}
+            
+    {%endblock%}
+  </div>
+</div>
+
+<script type="text/javascript" language="javascript">
+  $('#filePath, #newfilePath').bind('change', function() {
+      if(allFilled()) $('#btn').removeAttr('disabled');
+  });
+  
+  function allFilled() {
+      var filled = true;
+      $('body input').each(function() {
+          if($(this).val() == '') filled = false;
+      });
+      return filled;
+  }
+
+  </script>
+
+  <script>
+    function start(obj) {
+      document.querySelector(".btn_text").innerHTML = "Processing, please wait..";
+      obj.className = 'contact3-form-btn anim';
+    }
+  </script>
+  
+  <!-- <script>
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        console.log(this.readyState);
+          if(this.readyState == 4 && this.status == 200) {
+            console.log("Loaded...");
+          }
+      }
+      xhttp.open('get','http://127.0.0.1:5000/convert');
+      xhttp.send();        
+  </script> -->
+    
+{%endblock%}
+        

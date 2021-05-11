@@ -1,0 +1,73 @@
+{%extends "main.html" %}
+{%block lrtemplate%}
+<div class="lrList">
+  <ul id="frameworks">
+      
+      <li>
+          <a href="#" class="btn btn-secondary d-block w-100" id="newScript"> New Products</a>
+      </li>
+      <li id="Api_newScript" style="display: none;">
+        <a href="{{ url_for('New_Scripts_API')}}" class="btn btn-warning d-block w-100"> API</a>
+    </li>
+    <li id="Web_newScript" style="display: none;">
+      <a href="{{ url_for('New_Scripts')}}" class="btn btn-info d-block w-100"> UI</a>
+  </li>
+      <li>
+        <a href="{{ url_for('Exist_New_Scripts')}}" class="btn btn-secondary d-block w-100"> Existing Products with New Changes</a>
+    </li>
+      <li>
+          <a href="{{ url_for('Exist_Scripts')}}" class="btn btn-secondary d-block w-100"> Existing Products</a>
+      </li>
+  </ul>
+</div>
+  <div class="" id="message"> 
+
+    {%block success2%}
+        
+    {%endblock%}
+    
+    {%block error2%}
+            
+    {%endblock%}
+</div>
+</form>
+
+<script>
+  $(document).ready(function(){
+      $("#newScript").click(function(){
+      $("#Api_newScript").toggle(1000);
+      $("#Web_newScript").toggle(1000);
+    });
+  });
+
+</script>
+
+<script type="text/javascript" language="javascript">
+$('#filePath, #excelPath').bind('change', function() {
+    if(allFilled()) $('#btn').removeAttr('disabled');
+});
+
+function allFilled() {
+    var filled = true;
+    $('body input').each(function() {
+        if($(this).val() == '') filled = false;
+    });
+    return filled;
+}
+</script>
+<script>
+
+function showDiv(divId, element)
+{
+    document.getElementById(divId).style.display = element.value == "Yes" ? 'flex' : 'none';
+}
+
+</script>
+<script>
+  function start(obj) {
+    document.querySelector(".btn_text").innerHTML = "Processing, please wait..";
+    obj.className = 'contact3-form-btn anim';
+  }
+</script>
+
+{%endblock%}

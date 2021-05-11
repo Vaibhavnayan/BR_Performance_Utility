@@ -1,0 +1,206 @@
+{%extends "main.html" %}
+{%block lrtemplate%}
+
+<div class="lrList">
+    <ul id="frameworks">
+        <li>
+            <a href="{{ url_for('Exist_Scripts')}}" class="btn btn-secondary d-block w-100"> Existing Products</a>
+        </li>
+    </ul>
+  </div>
+  
+<div class="lrList">
+
+    <TABLE BORDER="1">
+        <tr>
+            <TH>
+                Test Phases
+            </TH>
+            <th>
+                Minimum hours
+            </th>
+            <th>
+                Maximum hours
+            </th>
+        </tr>
+        
+          <tr>
+              <td> Test Planning </td>
+              <TD><INPUT TYPE="text" id="testplan">
+              </TD>  
+              <TD><INPUT TYPE="text" id="testplan2">
+              </TD>   
+          </tr>
+          <tr>
+            <td> Performance Scripts Creation</td>
+            <TD><INPUT TYPE="text" id="Scripts">
+            </TD> 
+            <TD><INPUT TYPE="text" id="Scripts2">
+            </TD> 
+        </tr> 
+        <!-- <tr>
+            <td> Trial Execution </td>
+            <TD><INPUT TYPE="text" id="Trial">
+            </TD> 
+            <TD><INPUT TYPE="text" id="Trial2">
+            </TD>  
+        </tr>  -->
+        <tr>
+            <td> Performance Execution </td>
+            <TD><INPUT TYPE="text" id="Execution">
+            </TD> 
+            <TD><INPUT TYPE="text" id="Execution2">
+            </TD>    
+        </tr> 
+        <tr>
+            <td> Debug Runs, Performance Analysis & Reporting  </td>
+            <TD><INPUT TYPE="text" id="Debug">
+            </TD> 
+            <TD><INPUT TYPE="text" id="Debug2">
+            </TD>    
+        </tr> 
+        <tr>
+            <td> Performance Testing Total Efforts </td>
+            <TD>
+                <INPUT TYPE="text" id="min" NAME="min" value="100" min="100" max="125" required>
+              </TD>
+              <TD><INPUT TYPE="text" id="max" NAME="max" value="125" min="100" max="125" required>
+               
+        </tr> 
+        <tr>
+            <td> Management Oversight </td>
+            <TD><INPUT TYPE="text" id="Management">
+            </TD> 
+            <TD><INPUT TYPE="text" id="Management2">
+            </TD>   
+        </tr>   
+        <TR>
+            <TD>Total Efforts (hrs)</TD>
+            <TD><INPUT TYPE="text" id="Reporting">
+            </TD>
+            <TD><INPUT TYPE="text" id="Reporting2">
+            </TD>  
+            
+          </TR>
+            
+          <tr>
+          <td class="calc" colspan="3"><input class="contact3-form-btn" type="button" value="Calculate" onclick="solve()"/> </td>
+          
+        </tr>
+      </TABLE>
+  <!-- <ul id="frameworks">
+      
+      <li>
+          <a href="{{ url_for('New_Scripts')}}" class="btn btn-dark d-block w-100"> New Scripts</a>
+      </li>
+      <li>
+          <a href="{{ url_for('Exist_Scripts')}}" class="btn btn-dark d-block w-100"> Exisitng Scripts</a>
+      </li>
+  </ul> -->
+</div>
+  <div class="" id="message"> 
+
+    {%block success2%}
+        
+    {%endblock%}
+    
+    {%block error2%}
+            
+    {%endblock%}
+</div>
+</form>
+
+<script> 
+    function solve() 
+    { 
+        if ((document.getElementById("min").value.length == 0) || (document.getElementById("max").value.length == 0)) 
+      { 
+         alert("Please fill Performance Testing total hours");  	
+         return false; 
+      }  
+      
+
+        let x = document.getElementById("min").value
+        let z = document.getElementById("max").value
+
+        if (eval(x) < 90 || eval(x) > 110)
+      { 
+         alert("Min value should under 90-110 hrs");  	
+         return false; 
+      }  
+      
+      if (eval(z) > 150 || eval(z) < 120)
+      { 
+         alert("Max value should under 120-150 hrs");  	
+         return false; 
+      }
+        let y = eval(x) * 0.1
+        let a = eval(x) * 0.3
+        let b = eval(x) * 0.2
+        let c = eval(x) * 0.4
+        let total = eval(x) + (eval(x)*0.1)
+
+        let y2 = eval(z) * 0.1
+        let a2 = eval(z) * 0.3
+        let b2 = eval(z) * 0.2
+        let c2 = eval(z) * 0.4
+        let total2 = eval(z) + (eval(z)*0.1)
+
+
+
+        document.getElementById("testplan").value = y
+        document.getElementById("Scripts").value = a 
+        // document.getElementById("Trial").value = b 
+        document.getElementById("Execution").value = c 
+        document.getElementById("Debug").value = b 
+        document.getElementById("Reporting").value = total
+        //document.getElementById("").value = y 
+        document.getElementById("Management").value =  0.1*x
+
+
+        document.getElementById("testplan2").value = y2
+        document.getElementById("Scripts2").value = a2 
+       // document.getElementById("Trial2").value = b2 
+        document.getElementById("Execution2").value = c2 
+        document.getElementById("Debug2").value = b2 
+        document.getElementById("Reporting2").value = total2 
+        document.getElementById("Management2").value = 0.1*z
+
+    } 
+      
+    //function that clear the display 
+    function clr() 
+    { 
+        document.getElementById("result").value = "" 
+    } 
+ </script> 
+
+<script type="text/javascript" language="javascript">
+$('#filePath, #excelPath').bind('change', function() {
+    if(allFilled()) $('#btn').removeAttr('disabled');
+});
+
+function allFilled() {
+    var filled = true;
+    $('body input').each(function() {
+        if($(this).val() == '') filled = false;
+    });
+    return filled;
+}
+</script>
+<script>
+
+function showDiv(divId, element)
+{
+    document.getElementById(divId).style.display = element.value == "Yes" ? 'flex' : 'none';
+}
+
+</script>
+<script>
+  function start(obj) {
+    document.querySelector(".btn_text").innerHTML = "Processing, please wait..";
+    obj.className = 'contact3-form-btn anim';
+  }
+</script>
+
+{%endblock%}

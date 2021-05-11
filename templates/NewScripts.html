@@ -1,0 +1,185 @@
+{%extends "main.html" %}
+{%block lrtemplate%}
+<div class="lrList">
+    <ul id="frameworks">
+        
+        <li>
+            <a href="#" class="btn btn-dark d-block w-100" id="newScript"> New Products</a>
+        </li>
+        <li id="Api_newScript">
+          <a href="{{ url_for('New_Scripts_API')}}" class="btn btn-warning d-block w-100"> API</a>
+      </li>
+      <li id="Web_newScript">
+        <a href="{{ url_for('New_Scripts')}}" class="btn btn-info d-block w-100"> UI</a>
+    </li>
+    </ul>
+  </div>
+
+<div class="wrap-input3">
+    <!-- <label class="filePath">Type of Script: </label><br> -->
+    <!-- <select name="scriptType" id="scriptType">
+        <option value="22" id="Simple" >Simple (5 to 10 clicks)</option>
+        <option value="26" id="Medium" >Medium (10 to 20 clicks)</option>
+        <option value="36" id="Complex" >Complex (20 to 30 clicks)</option>
+      </select> -->
+  <input class="input2 form-control" type="number" id="Simple" placeholder="No. of Simple scripts">
+  <input class="input2 form-control" type="number" id="Medium" placeholder="No. of Medium scripts">
+  <input class="input2 form-control" type="number" id="Complex" placeholder="No. of Complex scripts">
+
+
+  </div>
+  <!-- <div class="wrap-input3"> -->
+    <!-- <label class="filePath">Number of Test Cases: </label><br> -->
+  <!-- <input class="input2 form-control" type="number" id="testcases" placeholder="Number of Test Cases"> -->
+  <!-- <input class="input2 form-control" type="text" id="filePath" name="filePath" placeholder="Result Master ID" required><br> -->
+
+
+    
+  <!-- </div> -->
+<div class="lrList">
+
+    <TABLE BORDER="1">
+        <tr>
+            <TH>
+                Test Phases
+            </TH>
+            <th colspan="2"> 
+                Efforts (hrs)
+            </th>
+        </tr>
+        
+          <tr>
+              <td> Test Planning </td>
+              <TD><INPUT TYPE="text" id="testplan">
+              </TD>  
+              <!-- <TD><INPUT TYPE="text" id="testplan2">
+              </TD>    -->
+          </tr>
+          <tr>
+            <td> Performance Scripts Creation</td>
+            <TD><INPUT TYPE="text" id="Scripts">
+            </TD> 
+            <!-- <TD><INPUT TYPE="text" id="Scripts2">
+            </TD>  -->
+        </tr> 
+        <tr>
+            <td> Performance Execution </td>
+            <TD><INPUT TYPE="text" id="Execution">
+            </TD> 
+            <!-- <TD><INPUT TYPE="text" id="Execution2">
+            </TD>     -->
+        </tr> 
+        <tr>
+            <td> Debug runs, Performance Analysis & Reporting </td>
+            <TD><INPUT TYPE="text" id="Debug">
+            </TD> 
+            <!-- <TD><INPUT TYPE="text" id="Debug2">
+            </TD>     -->
+        </tr> 
+        <tr>
+            <td> Performance Testing Total Efforts </td>
+            <TD><INPUT TYPE="text" id="Reporting">
+            </TD>
+            <!-- <TD><INPUT TYPE="text" id="Reporting2">
+            </TD>      -->
+        </tr> 
+        <tr>
+            <td> Management Oversight </td>
+            <TD><INPUT TYPE="text" id="Management">
+            </TD> 
+            <!-- <TD><INPUT TYPE="text" id="Management2">
+            </TD>    -->
+        </tr>   
+        <TR>
+            <TD>Total hours</TD>
+            <TD>
+              <INPUT TYPE="text" id="min" NAME="min">
+            </TD>
+            <!-- <TD><INPUT TYPE="text" id="max" NAME="max"> -->
+            
+          </TR>
+            
+          <tr>
+          <td class="calc" colspan="3"><input class="contact3-form-btn" type="button" value="Calculate" onclick="solve()"/> </td>
+          
+        </tr>
+      </TABLE>
+  <!-- <ul id="frameworks">
+      
+      <li>
+          <a href="{{ url_for('New_Scripts')}}" class="btn btn-dark d-block w-100"> New Scripts</a>
+      </li>
+      <li>
+        <a href="{{ url_for('Exist_New_Scripts')}}" class="btn btn-dark d-block w-100"> Exisitng Scripts with New Changes</a>
+    </li>
+      <li>
+          <a href="{{ url_for('Exist_Scripts')}}" class="btn btn-dark d-block w-100"> Exisitng Scripts</a>
+      </li>
+  </ul> -->
+</div>
+  <div class="" id="message"> 
+
+    {%block success2%}
+        
+    {%endblock%}
+    
+    {%block error2%}
+            
+    {%endblock%}
+</div>
+</form>
+
+<script> 
+    function solve() 
+    { 
+        if ((document.getElementById("Simple").value.length == 0) || (document.getElementById("Medium").value.length == 0) || (document.getElementById("Complex").value.length == 0)) 
+      { 
+         alert("Please fill number of scripts");  	
+         return false; 
+      }   
+
+
+      ////
+      let simpScript = 16 * eval(document.getElementById("Simple").value)
+      let MedScript = 20 * eval(document.getElementById("Medium").value)
+      let CompScript = 24 * eval(document.getElementById("Complex").value)
+
+
+    //   ///
+    //     let x = document.getElementById("scriptType").value
+    //     let z = document.getElementById("testcases").value
+        
+        let a = simpScript + MedScript + CompScript//script creation
+        let y = Math.round(a * 0.3) // test planning
+        
+        if (Math.round(a * 1.5) < 80 )
+        {
+            var b = Math.round(a * 1.5) // test execution
+        }
+        else{
+            var b = 80 // test execution
+        }
+
+        let c = Math.round( b * 0.4) // debug runs
+
+        let total= a + y + b + c
+
+        
+        document.getElementById("testplan").value = y
+        document.getElementById("Scripts").value = a 
+        document.getElementById("Execution").value = b 
+        document.getElementById("Debug").value = c 
+        document.getElementById("Reporting").value = total 
+        document.getElementById("Management").value = Math.round(total*0.1)
+        document.getElementById("min").value = Math.round(total + (total*0.1))
+
+    } 
+      
+    // //function that clear the display 
+    // function clr() 
+    // { 
+    //     document.getElementById("result").value = "" 
+    // } 
+ </script> 
+
+{%endblock%}

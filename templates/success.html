@@ -1,0 +1,58 @@
+{%extends "index.html"%}
+
+{%block success%}
+  <p style="color: #fff; text-align: center;"> Your file is ready. </p>
+
+  <div class="text-center">
+    <a style="margin: 0px;" href="/save-files/" class="btn btn-success d-block" > Save </a>
+  <hr>
+  <!-- <a style="margin: 0px;" href="/mail-file/" class="btn btn-warning d-block">Mail!</a> -->
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-warning d-block w-100" data-toggle="modal" data-target="#exampleModal">
+  Share File
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Share your file</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/mail-file" method="post">
+          <div class="form-group">
+            <label for="exampleInputEmail1">To: </label>
+            <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" aria-describedby="emailHelp">
+           </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail2">Your Mail ID: </label>
+            <input type="email" class="form-control" id="exampleInputEmail2" name="exampleInputEmail2" aria-describedby="emailHelp">
+           </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password:</label>
+            <input type="password" class="form-control" name="exampleInputPassword1" id="exampleInputPassword1">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Subject: </label>
+            <input type="text" class="form-control" id="exampleInputEmail3" name="exampleInputEmail3" aria-describedby="emailHelp">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail4">Message: </label>
+            <textarea class="form-control" id="exampleInputEmail4" name="exampleInputEmail4" aria-describedby="emailHelp"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+          <span class="limit">(File size should be less than 25MB)</span> 
+        </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+  </div>
+
+{%endblock%}
